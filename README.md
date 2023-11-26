@@ -1,1 +1,6 @@
-# FP064_PHP_Producto_3
+## FP064 PHPDevelopers Producto 3
+
+1. Haz el build del docker: docker-compose build
+2. Corre la composición de docker: docker-compose up -d
+3. Instala las dependencias con docker: bin/composer install
+4. Accede a tu navegador http://localhost/
