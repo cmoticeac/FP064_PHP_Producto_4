@@ -18,11 +18,13 @@ Route::get('/tipoacto-edit', [AdminController::class, 'tipoActoEdit']);
 Route::post('/tipoacto-save', [AdminController::class, 'tipoActoSave']);
 Route::get('/tipoacto-delete/{id}', [AdminController::class, 'tipoActoDelete']);
 
+// Rutas de ponente
 Route::get('/ponente-edit', [AdminController::class, 'ponenteList']);
 Route::post('/ponente-save', [AdminController::class, 'ponenteSave']);
 Route::get('/ponente-delete/{id}', [AdminController::class, 'ponenteDelete']);
 Route::get('/ponente-add/{id}', [AdminController::class, 'ponenteAdd']);
 
+// Rutas de acto
 Route::get('/acto-edit', [AdminController::class, 'actoEdit']);
 Route::post('/acto-save', [AdminController::class, 'actoSave']);
 Route::get('/acto-delete/{id}', [AdminController::class, 'actoDelete']);
