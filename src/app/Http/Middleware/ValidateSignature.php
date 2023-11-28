@@ -7,8 +7,8 @@ use Illuminate\Routing\Middleware\ValidateSignature as Middleware;
 class ValidateSignature extends Middleware
 {
     /**
-     * The names of the query string parameters that should be ignored.
-     *
+     * Middleware utilizado para validar las firmas de las URL con firma. 
+     * Puedes especificar parámetros de cadena de consulta que deben ignorarse durante la validación de la firma.
      * @var array<int, string>
      */
     protected $except = [

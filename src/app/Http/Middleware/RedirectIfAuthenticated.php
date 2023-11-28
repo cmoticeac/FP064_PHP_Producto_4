@@ -11,8 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 class RedirectIfAuthenticated
 {
     /**
-     * Handle an incoming request.
-     *
+     * Este middleware redirecciona al usuario autenticado a la página de inicio. 
+     * Si el usuario ya está autenticado, este middleware evitará que se registre o inicie sesión nuevamente.
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next, string ...$guards): Response
