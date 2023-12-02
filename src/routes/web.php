@@ -5,13 +5,19 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CalendarioController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 
-// Rutas de usuario
-Route::post('/loginPost', [UserController::class, 'loginPost']);
-Route::post('/registerPost', [UserController::class, 'registerPost']);
+// Ruta de la página de inicio
+Route::get('/',  [IndexController::class, 'index']);
+
+// Rutas de usuario.
+Route::post('/registerPost', [LoginController::class, 'registerPost']);
+Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+
+Route::post('/loginPost', [LoginController::class, 'loginPost']);
+
 Route::get('/logout', [LogoutController::class, 'logout'])->middleware('auth')->name('logout');
-Route::get('/dashboard', [AdminController::class, 'dashboard'])->middleware('auth');
 Route::get('login', [IndexController::class, 'index'])->name('login');
 Route::get('/user-edit', [UserController::class, 'userEdit']);
 Route::post('/user-save', [UserController::class, 'userSave']);
@@ -37,6 +43,4 @@ Route::get('/calendario', [CalendarioController::class, 'index']);
 Route::post('/inscripcion', [CalendarioController::class, 'inscripcion']);
 Route::post('/desuscripcion', [CalendarioController::class, 'desuscripcion']);
 
-// Ruta de la página de inicio
-Route::get('/',  [IndexController::class, 'index']);
 

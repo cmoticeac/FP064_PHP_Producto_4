@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Usuario extends Model //Se ha cambiado el nombre de la clase a Usuario, siguiendo la convención de Laravel.
+class Usuario extends Authenticatable //Se ha cambiado el nombre de la clase a Usuario, siguiendo la convención de Laravel.
 {
     protected $table = 'Usuarios';
     protected $primaryKey = 'Id_usuario';
+    protected $fillable = ['Username', 'Password', 'Id_Persona', 'Id_tipo_usuario'];
     public $timestamps = false; // Añade esto solo si tu tabla no tiene campos timestamps
 
     // Método para registrar un nuevo usuario
