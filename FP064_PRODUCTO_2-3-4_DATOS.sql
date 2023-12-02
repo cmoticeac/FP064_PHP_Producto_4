@@ -24,8 +24,8 @@ INSERT INTO `Usuarios` (`Id_usuario`, `Username`, `Password`, `Id_Persona`, `Id_
 
 -- Insertar datos iniciales en la tabla `Actos`
 INSERT INTO `Actos` (`Id_acto`, `Fecha`, `Hora`, `Titulo`, `Descripcion_corta`, `Descripcion_larga`, `Num_asistentes`, `Id_tipo_acto`) VALUES
-(1, '2023-11-15', '10:00:00', 'Innovación en IA', 'Conferencia sobre avances en Inteligencia Artificial', 'Una exploración profunda de los últimos desarrollos en el campo de la IA y su impacto en la sociedad.', 150, 1),
-(2, '2023-11-16', '16:00:00', 'Blockchain y tú', 'Descubre cómo la tecnología Blockchain está revolucionando el mundo', 'Una mesa redonda para entender la tecnología Blockchain y sus aplicaciones.', 50, 3);
+(1, '2023-12-15', '10:00:00', 'Innovación en IA', 'Conferencia sobre avances en Inteligencia Artificial', 'Una exploración profunda de los últimos desarrollos en el campo de la IA y su impacto en la sociedad.', 150, 1),
+(2, '2023-12-16', '16:00:00', 'Blockchain y tú', 'Descubre cómo la tecnología Blockchain está revolucionando el mundo', 'Una mesa redonda para entender la tecnología Blockchain y sus aplicaciones.', 50, 3);
 
 -- Insertar datos iniciales en la tabla `Documentacion`
 INSERT INTO `Documentacion` (`Id_presentacion`, `Id_acto`, `Localizacion_documentacion`, `Orden`, `Id_persona`, `Titulo_documento`) VALUES
@@ -34,8 +34,8 @@ INSERT INTO `Documentacion` (`Id_presentacion`, `Id_acto`, `Localizacion_documen
 
 -- Insertar datos iniciales en la tabla `Inscritos`
 INSERT INTO `Inscritos` (`Id_inscripcion`, `Id_persona`, `id_acto`, `Fecha_inscripcion`) VALUES
-(1, 2, 1, '2023-11-01 09:00:00'),
-(2, 3, 2, '2023-11-02 10:00:00');
+(1, 2, 1, '2023-12-01 09:00:00'),
+(2, 3, 2, '2023-12-02 10:00:00');
 
 -- Insertar datos iniciales en la tabla `Lista_Ponentes`
 INSERT INTO `Lista_Ponentes` (`id_ponente`, `Id_persona`, `Id_acto`, `Orden`) VALUES

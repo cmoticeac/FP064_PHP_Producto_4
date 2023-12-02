@@ -25,6 +25,11 @@ class AdminController extends Controller
         $actos = Acto::all();
         $tiposActo = TipoActo::all();
 
+        // añadir label tipo_acto a cada acto
+        foreach ($actos as $acto) {
+            $acto->tipo_acto = TipoActo::find($acto->Id_tipo_acto)->Descripcion;
+        }
+
         // Redirigir a la vista del dashboard
         return view('index.dashboard', [
             'user' => Auth::user(),

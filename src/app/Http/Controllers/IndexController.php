@@ -12,16 +12,8 @@ class IndexController extends Controller
     {
         // Comprobar si el usuario está autenticado
         if (Auth::check()) {
-            // Obtener los actos y los tipos de actos
-            $actos = Acto::all();
-            $tiposActo = TipoActo::all();
-
-            // Redirigir a la vista del dashboard
-            return view('index.dashboard', [
-                'user' => Auth::user(),
-                'actos' => $actos,
-                'tipos_acto' => $tiposActo,
-            ]);
+            // redirigimos a dashboard
+            return redirect()->route('dashboard');
         } else {
             // Redirigir a la vista de registro o inicio de sesión
             return view('index.register');

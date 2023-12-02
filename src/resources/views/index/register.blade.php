@@ -26,6 +26,10 @@
         </div>
     </div>
     <div class="main-panel">
+            
+            {{-- Incluye 'navbar.html' --}}
+            @include('navbar', ['flash_messages' => $flash_messages ?? null])
+
         <div class="content">
             <div class="container-fluid">
 
