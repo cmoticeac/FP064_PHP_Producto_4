@@ -17,6 +17,13 @@ class AdminController extends Controller
         $this->middleware('admin'); // Asegúrate de tener este middleware
     }
 
+    // Método para mostrar el dashboard
+    public function dashboard()
+    {
+        // Redirigir a la vista del dashboard
+        return view('index.dashboard', ['user' => Auth::user()]);
+    }
+
     // Método para editar un acto existente
     public function actoEdit($id)
     {

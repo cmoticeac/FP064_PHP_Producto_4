@@ -50,11 +50,11 @@ class UserController extends Controller
     }
 
     // Método para mostrar el formulario de registro
-    public function register(Request $request)
+    public function registerPost(Request $request)
     {
         // Comprobar si el usuario está autenticado
         if (Auth::check()) {
-            return redirect()->route('home'); // Redirecciona si el usuario ya está logueado
+            return redirect()->route('dashboard'); // Redirecciona si el usuario ya está logueado
         }
 
         // Comprobar si se ha enviado el formulario
@@ -88,12 +88,13 @@ class UserController extends Controller
     }
 
     // Método para mostrar el formulario de inicio de sesión (Logueamos)
-    public function login(Request $request)
+    public function loginPost(Request $request)
     {
         $request->validate([
             'Username' => 'required|string',
             'Password' => 'required|string',
         ]);
+
 
         if (Auth::attempt($request->only('Username', 'Password'))) {
             return Redirect::to(route('dashboard'))->with('success', 'Se ha logueado correctamente.');
@@ -102,10 +103,4 @@ class UserController extends Controller
         return Redirect::back()->with('danger', 'Error al loguear el usuario.');
     }
 
-    // Método para cerrar sesión
-    public function logout()
-    {
-        Auth::logout();
-        return Redirect::to(route('home'))->with('success', 'Ha cerrado sesión correctamente.');
-    }
 }
