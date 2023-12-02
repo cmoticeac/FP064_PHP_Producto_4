@@ -33,7 +33,75 @@
 
                 <div class="row">
                     {{-- Formularios de login y registro --}}
-                    {{-- ... --}}
+                    <div class="row">
+
+                        <div class="col-md-6 offset-md-2">
+                            
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Login</h4>
+                                </div>
+                                
+                                <div class="card-body">
+                                
+                                    <form action="{{ url('/loginPost') }}" method="post" onsubmit="return validarFormulario()">
+                                        @csrf
+                                        <div>
+                                            <label for="Username">Nombre de Usuario:</label>
+                                            <input type="text" id="Username" name="Username" required>
+                                        </div>
+                                        <div>
+                                            <label for="Password">Contraseña:</label>
+                                            <input type="password" id="Password" name="Password" required>
+                                        </div>
+                                        <div>
+                                            <button type="submit" class="btn btn-primary btn-fill pull-right">Acceder</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 offset-md-2">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Registro</h4>
+                                </div>
+                                
+                                <div class="card-body">
+                                
+                                    <form action="{{ url('/registerPost') }}" method="post" onsubmit="return validarFormulario()">
+                                        @csrf
+                                        <div>
+                                            <label for="Nombre">Nombre:</label>
+                                            <input type="text" id="Nombre" name="Nombre" required>
+                                        </div>
+                                        <div>
+                                            <label for="Apellido1">Primer Apellido:</label>
+                                            <input type="text" id="Apellido1" name="Apellido1" required>
+                                        </div>
+                                        <div>
+                                            <label for="Apellido2">Segundo Apellido:</label>
+                                            <input type="text" id="Apellido2" name="Apellido2" required>
+                                        </div>
+                                        <div>
+                                            <label for="Username">Nombre de Usuario:</label>
+                                            <input type="text" id="Username" name="Username" required>
+                                        </div>
+                                        <div>
+                                            <label for="Password">Contraseña:</label>
+                                            <input type="password" id="Password" name="Password" required>
+                                        </div>
+                                        <div>
+                                            <button type="submit" class="btn btn-primary btn-fill pull-right">Registrarse</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

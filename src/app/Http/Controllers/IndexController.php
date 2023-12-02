@@ -27,11 +27,5 @@ class IndexController extends Controller
             return view('index.register');
         }
     }
-
-    // Método para mostrar el dashboard
-    public function dashboard()
-    {
-        // Redirigir a la vista del dashboard
-        return view('index.dashboard', ['user' => Auth::user()]);
-    }
+    
 }
