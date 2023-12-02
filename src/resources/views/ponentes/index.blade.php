@@ -46,7 +46,7 @@
                                                 <td>{{ $ponente->Titulo }}</td>
                                                 <td>{{ $ponente->Orden }}</td>
                                                 <td>
-                                                    <a href="{{ url('ponente-remove', ['id' => $ponente->id_ponente]) }}" class="btn btn-danger btn-sm">
+                                                    <a href="{{ url('ponente-delete', ['id' => $ponente->id_ponente]) }}" class="btn btn-danger btn-sm">
                                                         <i class="nc-icon nc-simple-remove"></i> Eliminar
                                                     </a>
                                                 </td>

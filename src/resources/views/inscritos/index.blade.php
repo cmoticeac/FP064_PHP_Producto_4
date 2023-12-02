@@ -5,7 +5,7 @@
 @section('title', 'Dashboard')
 
 {{-- Inicia el bloque 'content' para el contenido principal de la página --}}
-@section('content')
+@section('body')
 
 <div class="wrapper">
     {{-- Incluye 'sidebar.blade.php', pasa 'user' si existe --}}
@@ -46,7 +46,7 @@
                                                 <td>{{ $inscrito->Titulo }}</td>
                                                 <td>{{ $inscrito->Fecha }}</td>
                                                 <td>
-                                                    <a href="{{ url('inscritos-remove', ['id' => $inscrito->Id_inscripcion]) }}" class="btn btn-danger btn-sm">
+                                                    <a href="{{ url('inscritos-delete', ['id' => $inscrito->Id_inscripcion]) }}" class="btn btn-danger btn-sm">
                                                         <i class="nc-icon nc-simple-remove"></i> Eliminar
                                                     </a>
                                                 </td>

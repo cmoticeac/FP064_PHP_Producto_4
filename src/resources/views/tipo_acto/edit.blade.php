@@ -5,7 +5,7 @@
 @section('title', 'Dashboard')
 
 {{-- Inicia el bloque 'content' para el contenido principal de la página --}}
-@section('content')
+@section('body')
 
 <div class="wrapper">
     {{-- Incluye 'sidebar.blade.php', pasa 'user' si existe --}}
@@ -18,6 +18,9 @@
         <div class="content">
             <!-- Formulario para guardar datos de un tipo_acto -->
             <form method="post" action="{{ url('tipoacto-save') }}" class="needs-validation" novalidate>
+                @csrf
+                
+                {{-- Si existe un tipo_acto, se trata de una edición, por lo que se incluye el campo 'Id_tipo_acto' --}}
                 @if (isset($tipo_acto) && $tipo_acto->Id_tipo_acto)
                     <div class="form-group">
                         <label for="Descripcion">ID Tipo Acto:</label><br>

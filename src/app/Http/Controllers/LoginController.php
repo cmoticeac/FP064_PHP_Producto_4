@@ -33,7 +33,7 @@ class LoginController extends Controller
 
         // comprobar si existe el usuario por el Username
         if (Usuario::where('Username', $validatedData['Username'])->exists()) {
-            return Redirect::back()->with('danger', 'El nombre de usuario ya existe.');
+            return Redirect::back()->with('error', 'El nombre de usuario ya existe.');
         }
 
         // Crear Persona
@@ -73,7 +73,7 @@ class LoginController extends Controller
             return redirect()->route('dashboard')->with('success', 'Se ha logueado correctamente.');
         }
 
-        return Redirect::back()->with('danger', 'Error al loguear el usuario.');
+        return Redirect::back()->with('error', 'Error al loguear el usuario.');
     }
     
 }

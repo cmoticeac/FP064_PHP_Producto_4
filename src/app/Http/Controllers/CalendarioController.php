@@ -49,7 +49,7 @@ class CalendarioController extends Controller
             return redirect()->route('calendario')->with('success', 'Inscripción realizada correctamente.');
         }
 
-        return redirect()->route('calendario')->with('danger', 'No hay plazas disponibles o ya estás inscrito.');
+        return redirect()->route('calendario')->with('error', 'No hay plazas disponibles o ya estás inscrito.');
     }
 
     // Método para realizar la desinscripción de un acto
@@ -63,7 +63,7 @@ class CalendarioController extends Controller
             return redirect()->route('calendario')->with('success', 'Desinscripción realizada correctamente.');
         }
 
-        return redirect()->route('calendario')->with('danger', 'Error al realizar la desinscripción.');
+        return redirect()->route('calendario')->with('error', 'Error al realizar la desinscripción.');
     }
 
     // Método para crear los eventos del calendario

@@ -34,17 +34,21 @@ Route::post('/acto-save', [AdminController::class, 'actoSave']);
 Route::get('/acto-delete/{id}', [AdminController::class, 'actoDelete']);
 
 // Rutas de ponente
-Route::get('/ponente-list/{id?}', [AdminController::class, 'ponenteList']);
+Route::get('/ponente-list/{id?}', [AdminController::class, 'ponenteList'])->name('ponente-list');
+Route::get('/ponente-add/{id?}', [AdminController::class, 'ponenteAdd']);
 Route::post('/ponente-save', [AdminController::class, 'ponenteSave']);
 Route::get('/ponente-delete/{id}', [AdminController::class, 'ponenteDelete']);
-Route::get('/ponente-add/{id}', [AdminController::class, 'ponenteAdd']);
-
-
 
 // Rutas de tipo de acto
 Route::get('/tipoacto-edit/{id?}', [AdminController::class, 'tipoActoEdit']);
 Route::post('/tipoacto-save', [AdminController::class, 'tipoActoSave']);
 Route::get('/tipoacto-delete/{id}', [AdminController::class, 'tipoActoDelete']);
+
+// Rutas de inscritos
+Route::get('/inscritos-list/{id?}', [AdminController::class, 'inscritosList'])->name('inscritos-list');
+Route::get('/inscritos-add/{id?}', [AdminController::class, 'inscritosAdd']);
+Route::post('/inscritos-save', [AdminController::class, 'inscritosSave']);
+Route::get('/inscritos-delete/{id}', [AdminController::class, 'inscritosDelete']);
 
 
 

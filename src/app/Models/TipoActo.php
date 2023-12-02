@@ -8,6 +8,7 @@ class TipoActo extends Model
 {
     protected $table = 'Tipo_acto';
     protected $primaryKey = 'Id_tipo_acto';
+    protected $fillable = ['Descripcion'];
     public $timestamps = false; // Ni nustra tabla no tiene campos timestamps
 
 }

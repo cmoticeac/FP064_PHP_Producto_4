@@ -5,7 +5,7 @@
 @section('title', 'Dashboard')
 
 {{-- Inicia el bloque 'content' para el contenido principal de la página --}}
-@section('content')
+@section('body')
 
 <div class="wrapper">
     {{-- Incluye 'sidebar.blade.php', pasa 'user' si existe --}}
@@ -19,6 +19,9 @@
             <h1>Añadir inscripción</h1>
             {{-- Formulario para guardar datos de un inscrito --}}
             <form method="post" action="{{ url('inscritos-save') }}" class="needs-validation" novalidate>
+                @csrf
+                
+                {{-- Si existe un inscrito, se trata de una edición, por lo que se incluye el campo 'Id_inscripcion' --}}
                 
                 <div class="form-group">
                     <label for="Id_acto">Acto:</label>
