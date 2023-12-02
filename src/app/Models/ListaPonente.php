@@ -8,6 +8,7 @@ class ListaPonente extends Model
 {
     protected $table = 'Lista_Ponentes';
     protected $primaryKey = 'id_ponente';
+    protected $fillable = ['Id_persona', 'Id_acto', 'Orden'];
     public $timestamps = false; // Si nuestra tabla no tiene campos timestamps
 
     public function persona()

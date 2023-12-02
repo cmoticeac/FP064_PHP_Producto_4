@@ -10,6 +10,9 @@ class Acto extends Model
 {
     protected $table = 'Actos';
     protected $primaryKey = 'Id_acto';
+    protected $fillable = ['Fecha', 'Hora', 'Titulo', 'Descripcion_corta', 'Descripcion_larga', 'Num_asistentes', 'Id_tipo_acto'];
+    public $timestamps = false;
+
 
     public function inscritos(): BelongsToMany
     {

@@ -90,12 +90,12 @@ class CalendarioController extends Controller
                 'title' => $acto->Titulo,
                 'start' => $acto->Fecha,
                 'end' => $acto->Fecha,
-                'color' => $esPonente ? '#007bff' : ($esInscrito ? '#28a745' : '#dc3545'),
+                'color' => $esPonente ? '#ff8000' : ($esInscrito ? '#28a745' : '#dc3545'),
                 'textColor' => '#fff',
-                'url' =>($esInscrito ? route('desuscripcion', ['id' => $acto->Id_acto]) : route('inscripcion', ['id' => $acto->Id_acto])),
+                'url' => $esPonente ? '' : (($esInscrito ? route('desuscripcion', ['id' => $acto->Id_acto]) : route('inscripcion', ['id' => $acto->Id_acto]))),
                 'classNames' => $esPonente ? 'ponencia' : ($esInscrito ? 'inscrito' : 'no-inscrito'),
                 'description' => $description,
-                'description2' => $esInscrito ? 'Clic para desuscribirte' : 'Clic para suscribirte',
+                'description2' => $esPonente ? 'ERES PONENTE' : ($esInscrito ? 'Clic para desuscribirte' : 'Clic para suscribirte'),
             ];
 
             $eventos[] = $evento;

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Usuario;
 use App\Models\Acto;
 use App\Models\TipoActo;
 use App\Models\ListaPonente;
@@ -19,33 +20,45 @@ class AdminController extends Controller
     // Método para mostrar el dashboard
     public function dashboard()
     {
+        // recuperar actos
+        $actos = Acto::all();
+        $tiposActo = TipoActo::all();
+
         // Redirigir a la vista del dashboard
-        return view('index.dashboard', ['user' => Auth::user()]);
+        return view('index.dashboard', [
+            'user' => Auth::user(),
+            'actos' => $actos,
+            'tipos_acto' => $tiposActo,
+        ]);
     }
 
     // Método para editar un acto existente
-    public function actoEdit($id)
+    public function actoEdit($id = null)
     {
-        $acto = Acto::find($id);
+        $acto = $id ? Acto::find($id) : new Acto;
         $tiposActo = TipoActo::all();
+        
+        $usuario = Usuario::find(Auth::id());
 
         return view('actos.edit', [
+            'user' => $usuario,
             'acto' => $acto,
             'tipo_acto' => $tiposActo,
         ]);
     }
 
     // Método para guardar o actualizar un acto
-    public function actoSave(Request $request, $id)
+    public function actoSave(Request $request)
     {
+        $id = $request->input('Id_acto');
         // Valida y guarda/actualiza el acto
         $acto = Acto::updateOrCreate(
-            ['id' => $id],
+            ['Id_acto' => $id],
             $request->all() // Asegúrate de validar y filtrar los datos adecuadamente
         );
 
-        return redirect()->route('ruta-a-listado-actos')
-                         ->with('status', $acto ? 'Acto guardado correctamente.' : 'Error al guardar el acto.');
+        return redirect()->route('dashboard')
+                         ->with('success', $acto ? 'Acto guardado correctamente.' : 'Error al guardar el acto.');
     }
 
     // Método para eliminar un acto
@@ -53,12 +66,15 @@ class AdminController extends Controller
     {
         try {
             $result = Acto::destroy($id);
-            $message = $result ? 'Acto eliminado correctamente.' : 'Error al eliminar el acto.';
+            if($result)
+                return redirect()->route('dashboard')->with('success', 'Acto eliminado correctamente.');
+            else
+                return redirect()->route('dashboard')->with('danger', 'Error al eliminar el acto.');
         } catch (\Exception $e) {
-            $message = 'Error al eliminar el acto. Revisa que no tenga Invitados o ponentes asociados.';
+            return redirect()->route('dashboard')->with('danger', 'Error al eliminar el acto. Revisa que no tenga Invitados o ponentes asociados.');
         }
 
-        return redirect()->route('ruta-a-listado-actos')->with('status', $message);
+        return redirect()->route('dashboard')->with('error', 'Error al eliminar el acto.');
     }
 
         // Método para editar un acto existente
@@ -100,10 +116,29 @@ class AdminController extends Controller
         }
     
         // Método para listar los ponentes de un acto
-        public function listPonentes($idActo)
+        public function ponenteList($idActo = null)
         {
-            $ponentes = ListaPonente::where('Id_acto', $idActo)->get();
-            return view('ponentes.index', compact('ponentes'));
+            $usuario = Usuario::find(Auth::id());
+            if ($idActo) {
+                $listaPonentes = ListaPonente::where('Id_acto', $idActo)->get();
+            } else {
+                $listaPonentes = ListaPonente::all();
+            }
+            $ponentes = [];
+            foreach ($listaPonentes as $ponente) {
+                $ponentes[] = (object)[
+                    'id_ponente' => $ponente->id_ponente,
+                    'Nombre' => $ponente->persona->Nombre,
+                    'Apellido1' => $ponente->persona->Apellido1,
+                    'Apellido2' => $ponente->persona->Apellido2,
+                    'Titulo' => $ponente->acto->Titulo,
+                    'Orden' => $ponente->Orden,
+                ];
+            }
+            return view('ponentes.index', [
+                'user' => $usuario,
+                'ponentes' => (object)$ponentes,
+            ]);
         }
     
         // Método para añadir un ponente a un acto

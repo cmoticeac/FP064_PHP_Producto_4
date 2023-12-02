@@ -28,19 +28,24 @@ Route::get('/desuscripcion/{id}', [CalendarioController::class, 'desuscripcion']
 // Rutas de administrador
 Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard')->middleware('auth');
 
-Route::get('/tipoacto-edit', [AdminController::class, 'tipoActoEdit']);
-Route::post('/tipoacto-save', [AdminController::class, 'tipoActoSave']);
-Route::get('/tipoacto-delete/{id}', [AdminController::class, 'tipoActoDelete']);
+// Rutas de acto
+Route::get('/acto-edit/{id?}', [AdminController::class, 'actoEdit']);
+Route::post('/acto-save', [AdminController::class, 'actoSave']);
+Route::get('/acto-delete/{id}', [AdminController::class, 'actoDelete']);
 
 // Rutas de ponente
-Route::get('/ponente-edit', [AdminController::class, 'ponenteList']);
+Route::get('/ponente-list/{id?}', [AdminController::class, 'ponenteList']);
 Route::post('/ponente-save', [AdminController::class, 'ponenteSave']);
 Route::get('/ponente-delete/{id}', [AdminController::class, 'ponenteDelete']);
 Route::get('/ponente-add/{id}', [AdminController::class, 'ponenteAdd']);
 
-// Rutas de acto
-Route::get('/acto-edit', [AdminController::class, 'actoEdit']);
-Route::post('/acto-save', [AdminController::class, 'actoSave']);
-Route::get('/acto-delete/{id}', [AdminController::class, 'actoDelete']);
+
+
+// Rutas de tipo de acto
+Route::get('/tipoacto-edit/{id?}', [AdminController::class, 'tipoActoEdit']);
+Route::post('/tipoacto-save', [AdminController::class, 'tipoActoSave']);
+Route::get('/tipoacto-delete/{id}', [AdminController::class, 'tipoActoDelete']);
+
+
 
 
