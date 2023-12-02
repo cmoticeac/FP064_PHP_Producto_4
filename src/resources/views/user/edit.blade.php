@@ -5,7 +5,7 @@
 @section('title', 'Dashboard')
 
 {{-- Inicia el bloque 'content' para el contenido principal de la página --}}
-@section('content')
+@section('body')
 
 <div class="wrapper">
     {{-- Incluye 'sidebar.blade.php', pasa 'user' si existe --}}

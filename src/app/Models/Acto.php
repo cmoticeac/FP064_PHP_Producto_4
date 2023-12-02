@@ -20,7 +20,7 @@ class Acto extends Model
     public function ponentes(): HasMany
     {
         // Asumiendo una relación uno a muchos entre Actos y Lista_Ponentes
-        return $this->hasMany(ListaPonentes::class, 'Id_acto');
+        return $this->hasMany(ListaPonente::class, 'Id_acto');
     }
 
     public function tipoActo()

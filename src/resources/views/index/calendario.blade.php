@@ -26,8 +26,46 @@
                                     <h4 class="card-title">Calendario de Eventos</h4>
                                 </div>
                                 <div class="card-body">
-                                    <!-- Aquí puedes agregar el contenido del calendario -->
-                                    <p>Contenido del Calendario</p>
+                                    <!-- Calendario -->
+                                    <div class="col-12">
+                                        <div class="card ">
+                                            <div id='calendar'></div>
+                                            <script>
+                                                document.addEventListener('DOMContentLoaded', function() {
+                                                    var calendarEl = document.getElementById('calendar');
+                                                    var calendar = new FullCalendar.Calendar(calendarEl, {
+                                                        themeSystem: 'bootstrap5',
+                                                        locale: 'es',
+                                                        initialView: 'dayGridMonth',
+                                                        firstDay: 1,
+                                                        headerToolbar: {
+                                                            left: 'prev,next today',
+                                                            center: 'title',
+                                                            right: 'dayGridMonth,timeGridWeek,timeGridDay',
+                                                        },
+                                                        buttonText: {
+                                                            today: 'Hoy',
+                                                            month: 'Mes',
+                                                            week: 'Semana',
+                                                            day: 'Día',
+                                                            list: 'Lista'
+                                                        },
+                                                        eventDidMount: function(info) {
+                                                            $(info.el).tooltip({
+                                                                title: `${info.event.extendedProps.description}<div><a href="${info.event.extendedProps.url}"><strong>${info.event.extendedProps.description2}</strong></a></div>`,	
+                                                                html: true,
+                                                                container: 'body',
+                                                                delay: { "show": 50, "hide": 50 }
+                                                            });
+                                                        },
+                                                        events: {!! $eventos !!}
+                                                    });
+                                                    calendar.render();
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

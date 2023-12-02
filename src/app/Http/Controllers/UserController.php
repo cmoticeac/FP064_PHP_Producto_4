@@ -18,13 +18,24 @@ class UserController extends Controller
     }
 
     // Método para mostrar el perfil del usuario
-    public function edit()
+    public function userEdit()
     {
-        return view('user.edit', ['user' => Auth::user()]);
+        // recuperamos el usuario y persona
+        $usuario = Usuario::find(Auth::id());
+        $persona = Persona::find($usuario->Id_Persona);
+        // construimos el array de datos de editar usuario
+        $userForm = [];
+        $userForm['Username'] = $usuario->Username;
+        $userForm['Id_tipo_usuario'] = $usuario->Id_tipo_usuario;
+        $userForm['Nombre'] = $persona->Nombre;
+        $userForm['Apellido1'] = $persona->Apellido1;
+        $userForm['Apellido2'] = $persona->Apellido2;
+
+        return view('user.edit', ['user' => (object)$userForm]);
     }
 
     // Método para actualizar los datos del usuario
-    public function save(Request $request)
+    public function userSave(Request $request)
     {
         $request->validate([
             'Username' => 'required|string|max:255',
@@ -43,7 +54,7 @@ class UserController extends Controller
         $user->save();
 
         // Actualiza la información de la persona
-        $persona = Persona::find($user->persona_id);
+        $persona = Persona::find($user->Id_Persona);
         $persona->update($request->only(['Nombre', 'Apellido1', 'Apellido2']));
 
         return Redirect::back()->with('success', 'Se ha actualizado correctamente.');

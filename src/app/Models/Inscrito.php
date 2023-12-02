@@ -8,6 +8,7 @@ class Inscrito extends Model
 {
     protected $table = 'Inscritos';
     protected $primaryKey = 'Id_inscripcion';
+    protected $fillable = ['Id_acto', 'Id_persona', 'Fecha_inscripcion'];
     public $timestamps = false; // Si nuestra tabla no tiene campos timestamps
 
     public function acto()

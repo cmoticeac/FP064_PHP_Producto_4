@@ -65,9 +65,12 @@ class LoginController extends Controller
             'Password' => 'required|string',
         ]);
 
-
-        if (Auth::attempt($request->only('Username', 'Password'))) {
-            return Redirect::to(route('dashboard'))->with('success', 'Se ha logueado correctamente.');
+        // Comprobar si el usuario existe y la contraseña es correcta
+        $user = Usuario::login($request->Username, $request->Password);
+        // autenticar al usuario
+        if ($user) {
+            Auth::login($user);
+            return redirect()->route('dashboard')->with('success', 'Se ha logueado correctamente.');
         }
 
         return Redirect::back()->with('danger', 'Error al loguear el usuario.');

@@ -9,20 +9,25 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 
 // Ruta de la página de inicio
-Route::get('/',  [IndexController::class, 'index']);
+Route::get('/',  [IndexController::class, 'index'])->name('index');
+
+// Rutas de login-logout.
+Route::post('/loginPost', [LoginController::class, 'loginPost']);
+Route::post('/registerPost', [LoginController::class, 'registerPost']);
+Route::get('/logout', [LogoutController::class, 'logout'])->middleware('auth')->name('logout');
 
 // Rutas de usuario.
-Route::post('/registerPost', [LoginController::class, 'registerPost']);
-Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard')->middleware('auth');
-
-Route::post('/loginPost', [LoginController::class, 'loginPost']);
-
-Route::get('/logout', [LogoutController::class, 'logout'])->middleware('auth')->name('logout');
-Route::get('login', [IndexController::class, 'index'])->name('login');
 Route::get('/user-edit', [UserController::class, 'userEdit']);
 Route::post('/user-save', [UserController::class, 'userSave']);
 
+// Rutas del calendario
+Route::get('/calendario', [CalendarioController::class, 'index'])->name('calendario');
+Route::get('/inscripcion/{id}', [CalendarioController::class, 'inscripcion'])->name('inscripcion');
+Route::get('/desuscripcion/{id}', [CalendarioController::class, 'desuscripcion'])->name('desuscripcion');
+
 // Rutas de administrador
+Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+
 Route::get('/tipoacto-edit', [AdminController::class, 'tipoActoEdit']);
 Route::post('/tipoacto-save', [AdminController::class, 'tipoActoSave']);
 Route::get('/tipoacto-delete/{id}', [AdminController::class, 'tipoActoDelete']);
@@ -37,10 +42,5 @@ Route::get('/ponente-add/{id}', [AdminController::class, 'ponenteAdd']);
 Route::get('/acto-edit', [AdminController::class, 'actoEdit']);
 Route::post('/acto-save', [AdminController::class, 'actoSave']);
 Route::get('/acto-delete/{id}', [AdminController::class, 'actoDelete']);
-
-// Rutas del calendario
-Route::get('/calendario', [CalendarioController::class, 'index']);
-Route::post('/inscripcion', [CalendarioController::class, 'inscripcion']);
-Route::post('/desuscripcion', [CalendarioController::class, 'desuscripcion']);
 
 
