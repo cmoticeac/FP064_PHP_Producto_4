@@ -52,11 +52,11 @@
                                         @csrf
                                         <div>
                                             <label for="Username">Nombre de Usuario:</label>
-                                            <input type="text" id="Username" name="Username" required>
+                                            <input type="text" id="Username-login" name="Username" required>
                                         </div>
                                         <div>
                                             <label for="Password">Contraseña:</label>
-                                            <input type="password" id="Password" name="Password" required>
+                                            <input type="password" id="Password-login" name="Password" required>
                                         </div>
                                         <div>
                                             <button type="submit" class="btn btn-primary btn-fill pull-right">Acceder</button>
@@ -78,23 +78,23 @@
                                         @csrf
                                         <div>
                                             <label for="Nombre">Nombre:</label>
-                                            <input type="text" id="Nombre" name="Nombre" required>
+                                            <input type="text" id="Nombre-register" name="Nombre" required>
                                         </div>
                                         <div>
                                             <label for="Apellido1">Primer Apellido:</label>
-                                            <input type="text" id="Apellido1" name="Apellido1" required>
+                                            <input type="text" id="Apellido1-register" name="Apellido1" required>
                                         </div>
                                         <div>
                                             <label for="Apellido2">Segundo Apellido:</label>
-                                            <input type="text" id="Apellido2" name="Apellido2" required>
+                                            <input type="text" id="Apellido2-register" name="Apellido2" required>
                                         </div>
                                         <div>
                                             <label for="Username">Nombre de Usuario:</label>
-                                            <input type="text" id="Username" name="Username" required>
+                                            <input type="text" id="Username-register" name="Username" required>
                                         </div>
                                         <div>
                                             <label for="Password">Contraseña:</label>
-                                            <input type="password" id="Password" name="Password" required>
+                                            <input type="password" id="Password-register" name="Password" required>
                                         </div>
                                         <div>
                                             <button type="submit" class="btn btn-primary btn-fill pull-right">Registrarse</button>
