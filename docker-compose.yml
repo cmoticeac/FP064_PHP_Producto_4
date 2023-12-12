@@ -3,7 +3,7 @@ version: '3'
 services:
   web:
     build: ./images/php-apache
-    container_name: php_apache_prod3_container
+    container_name: php_apache_prod4_container
     ports:
       - "80:80"
     volumes:
@@ -13,7 +13,7 @@ services:
 
   db:
     image: mysql:8.1.0
-    container_name: mysql_prod3_container
+    container_name: mysql_prod4_container
     environment:
       MYSQL_ROOT_PASSWORD: 4321
       MYSQL_DATABASE: phpdevelopers
@@ -24,7 +24,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin_prod3_container
+    container_name: phpmyadmin_prod4_container
     ports:
       - "8000:80"
     environment:
