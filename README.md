@@ -1,10 +1,16 @@
-## FP064 PHPDevelopers Producto 3
+## FP064 PHPDevelopers Producto 4
 
 1. Haz el build del docker: docker-compose build
 2. Corre la composición de docker: docker-compose up -d
 3. Instala las dependencias con docker: bin/composer install
 4. Accede a tu navegador http://localhost/
 
+
+1. Haz el build del docker: docker-compose build
+2. Corre la composición de docker: docker-compose up -d
+3. Entras en el contenedor web: docker-compose exec web bash
+4. Instlas el composer con: composer install
+5. Accede al navegador http://localhost/
 
 NOTA:
 Al descargar en local el producto 3, copiar y renombrar archivo /src/.env.example a .env
