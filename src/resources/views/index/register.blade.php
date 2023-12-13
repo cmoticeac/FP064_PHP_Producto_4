@@ -27,8 +27,17 @@
     </div>
     <div class="main-panel">
             
-            {{-- Incluye 'navbar.html' --}}
-            @include('navbar', ['flash_messages' => $flash_messages ?? null])
+        {{-- Incluye 'navbar.html' --}}
+        @include('navbar', ['flash_messages' => $flash_messages ?? null])
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <div class="content">
             <div class="container-fluid">
@@ -48,15 +57,15 @@
                                 
                                 <div class="card-body">
                                 
-                                    <form action="{{ url('/loginPost') }}" method="post" onsubmit="return validarFormulario()">
+                                    <form action="{{ url('/loginPost') }}" method="post" onsubmit="return validarFormularioLogin()">
                                         @csrf
                                         <div>
-                                            <label for="Username">Nombre de Usuario:</label>
-                                            <input type="text" id="Username-login" name="Username" required>
+                                            <label for="Username-login">Nombre de Usuario:</label>
+                                            <input type="text" id="Username-login" name="Username" autocomplete="off" required>
                                         </div>
                                         <div>
-                                            <label for="Password">Contraseña:</label>
-                                            <input type="password" id="Password-login" name="Password" required>
+                                            <label for="Password-login">Contraseña:</label>
+                                            <input type="password" id="Password-login" name="Password" autocomplete="off" required>
                                         </div>
                                         <div>
                                             <button type="submit" class="btn btn-primary btn-fill pull-right">Acceder</button>
@@ -74,27 +83,27 @@
                                 
                                 <div class="card-body">
                                 
-                                    <form action="{{ url('/registerPost') }}" method="post" onsubmit="return validarFormulario()">
+                                    <form action="{{ url('/registerPost') }}" method="post" onsubmit="return validarFormularioRegistro()">
                                         @csrf
                                         <div>
-                                            <label for="Nombre">Nombre:</label>
-                                            <input type="text" id="Nombre-register" name="Nombre" required>
+                                            <label for="Nombre-register">Nombre:</label>
+                                            <input type="text" id="Nombre-register" name="Nombre" autocomplete="given-name" required>
                                         </div>
                                         <div>
-                                            <label for="Apellido1">Primer Apellido:</label>
-                                            <input type="text" id="Apellido1-register" name="Apellido1" required>
+                                            <label for="Apellido1-register">Primer Apellido:</label>
+                                            <input type="text" id="Apellido1-register" name="Apellido1" autocomplete="family-name" required>
                                         </div>
                                         <div>
-                                            <label for="Apellido2">Segundo Apellido:</label>
-                                            <input type="text" id="Apellido2-register" name="Apellido2" required>
+                                            <label for="Apellido2-register">Segundo Apellido:</label>
+                                            <input type="text" id="Apellido2-register" name="Apellido2" autocomplete="family-name" required>
                                         </div>
                                         <div>
-                                            <label for="Username">Nombre de Usuario:</label>
-                                            <input type="text" id="Username-register" name="Username" required>
+                                            <label for="Username-register">Nombre de Usuario:</label>
+                                            <input type="text" id="Username-register" name="Username" autocomplete="username" required>
                                         </div>
                                         <div>
-                                            <label for="Password">Contraseña:</label>
-                                            <input type="password" id="Password-register" name="Password" required>
+                                            <label for="Password-register">Contraseña:</label>
+                                            <input type="password" id="Password-register" name="Password" autocomplete="new-password" required>
                                         </div>
                                         <div>
                                             <button type="submit" class="btn btn-primary btn-fill pull-right">Registrarse</button>
@@ -123,17 +132,31 @@
 
 {{-- Script de validación para los formularios --}}
 <script>
-    function validarFormulario() {
-        let campos = ['nombre', 'apellido1', 'apellido2', 'username', 'password'];
-        for (let i = 0; i < campos.length; i++) {
-            let valor = document.getElementById(campos[i]).value;
-            if (valor.trim() === '') {
-                alert('Por favor, completa todos los campos.');
-                return false;
-            }
+   // Función de validación para el formulario de Login
+function validarFormularioLogin() {
+    let camposLogin = ['Username-login', 'Password-login'];
+    for (let i = 0; i < camposLogin.length; i++) {
+        let valor = document.getElementById(camposLogin[i]).value;
+        if (valor.trim() === '') {
+            alert('Por favor, completa todos los campos del login.');
+            return false;
         }
-        return true;
     }
+    return true;
+}
+
+// Función de validación para el formulario de Registro
+function validarFormularioRegistro() {
+    let camposRegistro = ['Nombre-register', 'Apellido1-register', 'Apellido2-register', 'Username-register', 'Password-register'];
+    for (let i = 0; i < camposRegistro.length; i++) {
+        let valor = document.getElementById(camposRegistro[i]).value;
+        if (valor.trim() === '') {
+            alert('Por favor, completa todos los campos del registro.');
+            return false;
+        }
+    }
+    return true;
+}
 </script>
 
 @endsection

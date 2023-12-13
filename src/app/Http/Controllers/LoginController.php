@@ -29,6 +29,8 @@ class LoginController extends Controller
             'Apellido2' => 'required|string|max:255',
             'Username' => 'required|string|max:255',
             'Password' => 'required|string|min:6',
+        ], [
+            'Password.min' => 'La contraseña debe tener al menos 6 caracteres.',
         ]);
 
         // comprobar si existe el usuario por el Username
