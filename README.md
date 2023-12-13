@@ -12,7 +12,7 @@
 5. Accede al navegador http://localhost/
 
 NOTA:
-Al descargar en local el producto 34, copiar y renombrar archivo /src/.env.example a .env
+Al descargar en local el producto 4, copiar y renombrar archivo /src/.env.example a .env
 El archivo “.env” en Laravel es utilizado para almacenar variables de entorno específicas del proyecto, por ejemplo las credenciales de la base de datos.
 Las credenciales y datos de conexión deben coincidir con los que hemos definido en el “docker-compose.yml”. 
 Al modificar datos del archivo, se recomienda ejecutar “php artisan config:cache” en nuestra consola dentro del directorio del proyecto para poder recargar la configuración de la aplicación ("docker-compose exec web bash")
