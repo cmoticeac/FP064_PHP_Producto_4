@@ -45,7 +45,7 @@
 
                 <div class="form-group">
                     <label for="Num_asistentes">Número de Asistentes:</label>
-                    <input type="number" class="form-control" name="Num_asistentes" id="Num_asistentes" value="{{ $acto->Num_asistentes ?? '' }}" required>
+                    <input type="number" class="form-control" name="Num_asistentes" id="Num_asistentes" min="0" value="{{ $acto->Num_asistentes ?? '' }}" required>
                 </div>
 
                 <div class="form-group">

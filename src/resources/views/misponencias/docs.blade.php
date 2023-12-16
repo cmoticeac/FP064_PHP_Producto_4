@@ -66,7 +66,7 @@
                                         <label for="titulo_documento">Titulo Documento:</label>
                                         <input type="input" name="titulo_documento" id="titulo_documento" class="form-control" required>
                                         <label for="orden_documento">Orden:</label>
-                                        <input type="number" name="orden_documento" id="orden_documento" class="form-control" required>
+                                        <input type="number" name="orden_documento" id="orden_documento" class="form-control" min="0" required>
                                     </div>
 
                                     <button type="submit" class="btn btn-primary">Subir Documentación</button>

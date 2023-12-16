@@ -26,11 +26,12 @@ INSERT INTO `Usuarios` (`Id_usuario`, `Username`, `Password`, `Id_Persona`, `Id_
 INSERT INTO `Actos` (`Id_acto`, `Fecha`, `Hora`, `Titulo`, `Descripcion_corta`, `Descripcion_larga`, `Num_asistentes`, `Id_tipo_acto`) VALUES
 (1, '2023-12-15', '10:00:00', 'Innovación en IA', 'Conferencia sobre avances en Inteligencia Artificial', 'Una exploración profunda de los últimos desarrollos en el campo de la IA y su impacto en la sociedad.', 150, 1),
 (2, '2023-12-16', '16:00:00', 'Blockchain y tú', 'Descubre cómo la tecnología Blockchain está revolucionando el mundo', 'Una mesa redonda para entender la tecnología Blockchain y sus aplicaciones.', 50, 3);
+(3, '2024-01-20', '18:00:00', 'Tecnologías Emergentes', 'Charla sobre tecnologías emergentes', 'Un seminario interactivo sobre las últimas tecnologías emergentes y su impacto en la industria.', 2, 2);
 
 -- Insertar datos iniciales en la tabla `Documentacion`
 INSERT INTO `Documentacion` (`Id_presentacion`, `Id_acto`, `Localizacion_documentacion`, `Orden`, `Id_persona`, `Titulo_documento`) VALUES
-(1, 1, '/docs/presentaciones/ia.pdf', 1, 1, 'Introducción a la IA'),
-(2, 2, '/docs/presentaciones/blockchain.pdf', 1, 2, 'Blockchain 101');
+(1, 1, '', 1, 1, 'Introducción a la IA'),
+(2, 2, '', 1, 2, 'Blockchain 101');
 
 -- Insertar datos iniciales en la tabla `Inscritos`
 INSERT INTO `Inscritos` (`Id_inscripcion`, `Id_persona`, `id_acto`, `Fecha_inscripcion`) VALUES

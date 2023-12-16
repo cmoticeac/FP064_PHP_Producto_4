@@ -80,6 +80,12 @@
                                                                     <i class="nc-icon nc-simple-remove"></i> Eliminar
                                                                 </a>
                                                             </div>
+                                                            <div>
+                                                                <!-- Botón para gestionar documentación -->
+                                                                <a href="{{ url('misponencias-docs', ['id' => $acto->Id_acto]) }}" class="btn btn-primary btn-sm mb-1">
+                                                                    <i class="nc-icon nc-ruler-pencil"></i> Gestionar documentación
+                                                                </a>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 @endforeach

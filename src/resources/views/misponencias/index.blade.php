@@ -57,6 +57,10 @@
                                                         <a href="{{ url('misponencias-docs', ['id' => $acto->Id_acto]) }}" class="btn btn-primary btn-sm mb-1">
                                                             <i class="nc-icon nc-ruler-pencil"></i> Gestionar documentación
                                                         </a>
+                                                        @else
+                                                        <span class="text-danger">
+                                                        Este acto no ha finalizado.
+                                                        </span>
                                                         @endif
                                                     </div>
                                                 </td>

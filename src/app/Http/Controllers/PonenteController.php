@@ -22,7 +22,7 @@ class PonenteController extends Controller
     {
         // validar que es ponente
         $usuario = Usuario::find(Auth::id());
-        if ($usuario->Id_tipo_usuario != 2) {
+        if (!in_array($usuario->Id_tipo_usuario,[1,2])) {
             return redirect()->route('index')->with('error', 'No tienes permisos para acceder a esta página.');
         }
 
@@ -35,9 +35,15 @@ class PonenteController extends Controller
         $userForm['Apellido1'] = $persona->Apellido1;
         $userForm['Apellido2'] = $persona->Apellido2;
 
-        $actos = Acto::with(['tipoActo', 'ponentes'])->whereHas('ponentes', function ($query) use ($usuario) {
-            $query->where('Id_persona', $usuario->Id_Persona);
-        })->get();
+        if($usuario->Id_tipo_usuario == 1) {
+            // si es admin, recupera todas las ponencias
+            $actos = Acto::with(['tipoActo', 'ponentes'])->get();
+        } else {
+            // si es ponente, recupera las ponencias del ponente
+            $actos = Acto::with(['tipoActo', 'ponentes'])->whereHas('ponentes', function ($query) use ($usuario) {
+                $query->where('Id_persona', $usuario->Id_Persona);
+            })->get();
+        }
         // añadir atributo a actos para saber si se puede subir documentación
         foreach ($actos as $acto) {
             $acto->puedeSubirDocumentacion = false;
@@ -57,7 +63,7 @@ class PonenteController extends Controller
     {
         // validar que es ponente
         $usuario = Usuario::find(Auth::id());
-        if ($usuario->Id_tipo_usuario != 2) {
+        if (!in_array($usuario->Id_tipo_usuario,[1,2])) {
             return redirect()->route('index')->with('error', 'No tienes permisos para acceder a esta página.');
         }
 
@@ -70,9 +76,15 @@ class PonenteController extends Controller
         $userForm['Apellido1'] = $persona->Apellido1;
         $userForm['Apellido2'] = $persona->Apellido2;
 
-        $acto = Acto::with(['tipoActo', 'ponentes'])->whereHas('ponentes', function ($query) use ($usuario) {
-            $query->where('Id_persona', $usuario->Id_Persona);
-        })->find($id);
+        if($usuario->Id_tipo_usuario == 1) {
+            // si es admin, recupera todas las ponencias
+            $acto = Acto::with(['tipoActo', 'ponentes'])->find($id);
+        } else {
+            // si es ponente, recupera las ponencias del ponente
+            $acto = Acto::with(['tipoActo', 'ponentes'])->whereHas('ponentes', function ($query) use ($usuario) {
+                $query->where('Id_persona', $usuario->Id_Persona);
+            })->find($id);
+        }
 
         // recupera la documentación del acto para la persona ordenada por orden
         $documentos = Documentacion::where('Id_persona', $usuario->Id_Persona)->where('Id_acto', $id)->orderBy('Orden')->get();
@@ -89,16 +101,20 @@ class PonenteController extends Controller
     {
         // validar que es ponente
         $usuario = Usuario::find(Auth::id());
-        if ($usuario->Id_tipo_usuario != 2) {
+        if (!in_array($usuario->Id_tipo_usuario,[1,2])) {
             return redirect()->route('index')->with('error', 'No tienes permisos para acceder a esta página.');
         }
 
         // validar que el acto es del ponente
-        $acto = Acto::with(['tipoActo', 'ponentes'])->whereHas('ponentes', function ($query) use ($usuario) {
-            $query->where('Id_persona', $usuario->Id_Persona);
-        })->find(request()->input('id_acto'));
-        if (!$acto) {
-            return redirect()->route('index')->with('error', 'No eres ponente para el acto.');
+        if (in_array($usuario->Id_tipo_usuario,[2])) {
+            $acto = Acto::with(['tipoActo', 'ponentes'])->whereHas('ponentes', function ($query) use ($usuario) {
+                $query->where('Id_persona', $usuario->Id_Persona);
+            })->find(request()->input('id_acto'));
+            if (!$acto) {
+                return redirect()->route('index')->with('error', 'No eres ponente para el acto.');
+            }
+        } else {
+            $acto = Acto::with(['tipoActo', 'ponentes'])->find(request()->input('id_acto'));
         }
 
         // validar que el acto se puede subir documentación
@@ -139,14 +155,16 @@ class PonenteController extends Controller
     {
         // validar que es ponente
         $usuario = Usuario::find(Auth::id());
-        if ($usuario->Id_tipo_usuario != 2) {
+        if (!in_array($usuario->Id_tipo_usuario,[1,2])) {
             return redirect()->route('index')->with('error', 'No tienes permisos para acceder a esta página.');
         }
 
         // validar que el documento es del ponente
         $documento = Documentacion::find($id);
-        if (!$documento || $documento->Id_persona != $usuario->Id_Persona) {
-            return redirect()->route('index')->with('error', 'No eres ponente para el documento.');
+        if (in_array($usuario->Id_tipo_usuario,[2])) {
+            if (!$documento || $documento->Id_persona != $usuario->Id_Persona) {
+                return redirect()->route('index')->with('error', 'No eres ponente para el documento.');
+            }
         }
 
         // borrar el documento

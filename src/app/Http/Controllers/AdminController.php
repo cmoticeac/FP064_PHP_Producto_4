@@ -79,8 +79,6 @@ class AdminController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('dashboard')->with('error', 'Error al eliminar el acto. Revisa que no tenga Invitados o ponentes asociados.');
         }
-
-        return redirect()->route('dashboard')->with('error', 'Error al eliminar el acto.');
     }
 
     // Método para listar los ponentes de un acto

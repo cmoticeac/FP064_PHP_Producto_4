@@ -43,7 +43,7 @@
 
                 <div class="form-group">
                     <label for="Orden">Orden:</label>
-                    <input type="number" class="form-control" name="Orden" id="Orden" value="0" required>
+                    <input type="number" class="form-control" name="Orden" id="Orden" value="0" min="0" required>
                 </div>
         
                 {{-- Botón para enviar el formulario --}}
