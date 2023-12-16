@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Acto;
+use App\Models\Documentacion;
 
 class EventosController extends Controller
 {
@@ -20,9 +21,13 @@ class EventosController extends Controller
     public function eventoView($id)
     {
         $acto = Acto::with(['tipoActo', 'ponentes'])->find($id);
+
+        // recuperar los documentos de la ponencia
+        $documentos = Documentacion::where('Id_acto', $id)->orderBy('Orden')->get();
         
         return view('eventos.view', [
             'acto' => $acto,
+            'documentos' => $documentos
         ]);
     }
 

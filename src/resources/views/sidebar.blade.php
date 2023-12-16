@@ -42,6 +42,14 @@
                     </a>
                 </li>
             @endif
+            @if ($user->Id_tipo_usuario == 2)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('misponencias-list') }}">
+                        <i class="nc-icon nc-chart-pie-35"></i>
+                        <p>Mis ponencias</p>
+                    </a>
+                </li>
+            @endif
             <li>
                 <a class="nav-link" href="{{ url('calendario') }}">
                     <i class="nc-icon nc-notes"></i>

@@ -9,9 +9,11 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\EventosController;
+use App\Http\Controllers\PonenteController;
 
 // Ruta de la página de inicio
 Route::get('/',  [IndexController::class, 'index'])->name('index');
+Route::redirect('/login', '/')->name('login');
 
 // Rutas de login-logout.
 Route::post('/loginPost', [LoginController::class, 'loginPost']);
@@ -40,6 +42,12 @@ Route::get('/ponente-list/{id?}', [AdminController::class, 'ponenteList'])->name
 Route::get('/ponente-add/{id?}', [AdminController::class, 'ponenteAdd']);
 Route::post('/ponente-save', [AdminController::class, 'ponenteSave']);
 Route::get('/ponente-delete/{id}', [AdminController::class, 'ponenteDelete']);
+
+// Rutas mis ponencias
+Route::get('/misponencias-list', [PonenteController::class, 'misponenciasList'])->name('misponencias-list');
+Route::get('/misponencias-docs/{id}', [PonenteController::class, 'misponenciasDocs'])->name('misponencias-docs');
+Route::post('/misponencias-add-doc', [PonenteController::class, 'misponenciasAddDoc'])->name('misponencias-add-doc');
+Route::delete('/misponencias-delete-doc/{id}', [PonenteController::class, 'misponenciasDeleteDoc'])->name('misponencias-delete-doc');
 
 // Rutas de tipo de acto
 Route::get('/tipoacto-edit/{id?}', [AdminController::class, 'tipoActoEdit']);

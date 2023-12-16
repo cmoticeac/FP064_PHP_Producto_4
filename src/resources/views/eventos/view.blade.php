@@ -24,6 +24,16 @@
                     <p><strong>Número de asistentes:</strong> {{ $acto->Num_asistentes }}</p>
                     <p><strong>Descripción corta:</strong> {{ $acto->Descripcion_corta ?? 'No disponible' }}</p>
                     <p><strong>Descripción larga:</strong> {{ $acto->Descripcion_larga ?? 'No disponible' }}</p>
+
+                    {{-- Listar documentos si existen --}}
+                    @if($documentos->count() > 0)
+                        <p><strong>Documentos</strong></p>
+                        <ul>
+                            @foreach($documentos as $documento)
+                                <li><a target="_blank" href="{{ asset('uploads/' . $documento->Localizacion_documentacion) }}">{{ $documento->Titulo_documento }}</a></li>
+                            @endforeach
+                        </ul>
+                    @endif
                 
                     <a href="{{ url('/invitacion') }}" type="submit" class="btn btn-primary">Inscribirse</a>
                 </div>
