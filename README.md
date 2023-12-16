@@ -19,4 +19,4 @@ Al modificar datos del archivo, se recomienda ejecutar “php artisan config:cac
 
 Cuando clonas el proyecto y lo configuras tu entorno local, debes copiar .env.example a .env y ejecutar "php artisan key:generate". Este comando generará automáticamente una nueva clave APP_KEY y la insertará en tu archivo .env.
 
-Recordar subir a PhpMyAdmin la base de datos SQL y el fichero de datoa (Importar)
+Recordar subir a PhpMyAdmin la base de datos SQL y el fichero de datos (Importar)

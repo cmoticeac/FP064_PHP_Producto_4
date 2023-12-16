@@ -7,6 +7,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\ApiController;
+use App\Http\Controllers\EventosController;
 
 // Ruta de la página de inicio
 Route::get('/',  [IndexController::class, 'index'])->name('index');
@@ -49,6 +51,12 @@ Route::get('/inscritos-list/{id?}', [AdminController::class, 'inscritosList'])->
 Route::get('/inscritos-add/{id?}', [AdminController::class, 'inscritosAdd']);
 Route::post('/inscritos-save', [AdminController::class, 'inscritosSave']);
 Route::get('/inscritos-delete/{id}', [AdminController::class, 'inscritosDelete']);
+
+// Rutas de eventos públicos y api
+Route::get('/eventos', [EventosController::class, 'index']);
+Route::get('/eventos/{id}', [EventosController::class, 'eventoView'])->name('eventos');
+Route::get('/invitacion', [EventosController::class, 'invitacion'])->name('invitacion');
+Route::get('/api/eventos/futuros', [ApiController::class, 'eventosFuturos']);
 
 
 
