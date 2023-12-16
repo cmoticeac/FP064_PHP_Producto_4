@@ -48,7 +48,7 @@
                                                 <td>{{ $acto->Titulo }}</td>
                                                 <td>{{ $acto->Descripcion_corta }}</td>
                                                 <td>{{ $acto->Num_asistentes }}</td>
-                                                <td>{{ $acto->tipo_acto }}</td>
+                                                <td>{{ $acto->Id_tipo_acto }}</td>
                                                 <td>{{ $acto->Descripcion_larga }}</td>
                                                 <td class="d-inline-block">
                                                     {{-- Si la fecha y hora es posterior a la actual se puede subir documentos --}}
