@@ -53,7 +53,7 @@
                                             </tr>
                                         @endforelse
                                     </tbody>
-                                <table>
+</table>
                                     
                                 {{-- Formulario para añadir nuevos documentos --}}
                                 <form action="{{ route('misponencias-add-doc') }}" method="POST" enctype="multipart/form-data">

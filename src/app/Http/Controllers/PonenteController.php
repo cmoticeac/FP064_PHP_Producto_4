@@ -35,15 +35,8 @@ class PonenteController extends Controller
         $userForm['Apellido1'] = $persona->Apellido1;
         $userForm['Apellido2'] = $persona->Apellido2;
 
-        if($usuario->Id_tipo_usuario == 1) {
-            // si es admin, recupera todas las ponencias
-            $actos = Acto::with(['tipoActo', 'ponentes'])->get();
-        } else {
-            // si es ponente, recupera las ponencias del ponente
-            $actos = Acto::with(['tipoActo', 'ponentes'])->whereHas('ponentes', function ($query) use ($usuario) {
-                $query->where('Id_persona', $usuario->Id_Persona);
-            })->get();
-        }
+        $actos = Acto::with(['tipoActo', 'ponentes'])->get();
+
         // añadir atributo a actos para saber si se puede subir documentación
         foreach ($actos as $acto) {
             $acto->puedeSubirDocumentacion = false;
@@ -75,19 +68,11 @@ class PonenteController extends Controller
         $userForm['Nombre'] = $persona->Nombre;
         $userForm['Apellido1'] = $persona->Apellido1;
         $userForm['Apellido2'] = $persona->Apellido2;
-
-        if($usuario->Id_tipo_usuario == 1) {
-            // si es admin, recupera todas las ponencias
-            $acto = Acto::with(['tipoActo', 'ponentes'])->find($id);
-        } else {
-            // si es ponente, recupera las ponencias del ponente
-            $acto = Acto::with(['tipoActo', 'ponentes'])->whereHas('ponentes', function ($query) use ($usuario) {
-                $query->where('Id_persona', $usuario->Id_Persona);
-            })->find($id);
-        }
+        
+        $acto = Acto::with(['tipoActo', 'ponentes'])->find($id);
 
         // recupera la documentación del acto para la persona ordenada por orden
-        $documentos = Documentacion::where('Id_persona', $usuario->Id_Persona)->where('Id_acto', $id)->orderBy('Orden')->get();
+        $documentos = Documentacion::where('Id_acto', $id)->orderBy('Orden')->get();
 
         return view('misponencias.docs', [
             'user' => (object)$userForm,
@@ -110,16 +95,20 @@ class PonenteController extends Controller
             $acto = Acto::with(['tipoActo', 'ponentes'])->whereHas('ponentes', function ($query) use ($usuario) {
                 $query->where('Id_persona', $usuario->Id_Persona);
             })->find(request()->input('id_acto'));
-            if (!$acto) {
-                return redirect()->route('index')->with('error', 'No eres ponente para el acto.');
-            }
         } else {
             $acto = Acto::with(['tipoActo', 'ponentes'])->find(request()->input('id_acto'));
         }
 
         // validar que el acto se puede subir documentación
         if(!($acto->Fecha < date('Y-m-d') || ($acto->Fecha == date('Y-m-d') && $acto->Hora < date('H:i:s')))) {
-            return redirect()->route('index')->with('error', 'No puedes subir documentación para este acto.');
+            // si eres administrador
+            if (in_array($usuario->Id_tipo_usuario,[1])) {
+                return redirect()->route('dashboard')->with('error', 'No puedes subir documentación para este acto porque no ha finalizado.');
+            }
+            // si eres ponente
+            if (in_array($usuario->Id_tipo_usuario,[1])) {
+                return redirect()->route('misponencias-list')->with('error', 'No puedes subir documentación para este acto porque no ha finalizado.');
+            }
         }
 
         // validar que se ha subido un fichero
