@@ -49,7 +49,7 @@ class CalendarioController extends Controller
             return redirect()->route('calendario')->with('success', 'Inscripción realizada correctamente.');
         }
 
-        return redirect()->route('calendario')->with('error', 'No hay plazas disponibles o ya estás inscrito.');
+        return redirect()->route('calendario')->with('error', 'No hay plazas disponibles.');
     }
 
     // Método para realizar la desinscripción de un acto
