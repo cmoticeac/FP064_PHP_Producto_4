@@ -35,7 +35,14 @@ class PonenteController extends Controller
         $userForm['Apellido1'] = $persona->Apellido1;
         $userForm['Apellido2'] = $persona->Apellido2;
 
-        $actos = Acto::with(['tipoActo', 'ponentes'])->get();
+        // si es ponente recupero los actos que tiene asignados
+        if (in_array($usuario->Id_tipo_usuario,[2])) {
+            $actos = Acto::with(['tipoActo', 'ponentes'])->whereHas('ponentes', function ($query) use ($usuario) {
+                $query->where('Id_persona', $usuario->Id_Persona);
+            })->get();
+        } else {
+            $actos = Acto::with(['tipoActo', 'ponentes'])->get();
+        }
 
         // añadir atributo a actos para saber si se puede subir documentación
         foreach ($actos as $acto) {
@@ -156,7 +163,13 @@ class PonenteController extends Controller
             }
         }
 
-        // borrar el documento
+        // borrar el documento físico del servidor
+        $filePath = public_path('uploads/' . $documento->Localizacion_documentacion); 
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+
+        // borrar el registro del documento
         $documento->delete();
 
         return redirect()->route('misponencias-docs', ['id' => $documento->Id_acto])->with('success', 'Documento borrado correctamente.');

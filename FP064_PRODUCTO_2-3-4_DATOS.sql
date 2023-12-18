@@ -30,8 +30,7 @@ INSERT INTO `Actos` (`Id_acto`, `Fecha`, `Hora`, `Titulo`, `Descripcion_corta`, 
 
 -- Insertar datos iniciales en la tabla `Documentacion`
 INSERT INTO `Documentacion` (`Id_presentacion`, `Id_acto`, `Localizacion_documentacion`, `Orden`, `Id_persona`, `Titulo_documento`) VALUES
-(1, 1, '', 1, 1, 'Introducción a la IA'),
-(2, 2, '', 1, 2, 'Blockchain 101');
+
 
 -- Insertar datos iniciales en la tabla `Inscritos`
 INSERT INTO `Inscritos` (`Id_inscripcion`, `Id_persona`, `id_acto`, `Fecha_inscripcion`) VALUES
