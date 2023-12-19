@@ -24,10 +24,17 @@ class EventosController extends Controller
 
         // recuperar los documentos de la ponencia
         $documentos = Documentacion::where('Id_acto', $id)->orderBy('Orden')->get();
+
+        // variable booleana que define si el usuario esta auténticado o no
+        $autenticado = auth()->check();
+
+        $user = auth()->user();
         
         return view('eventos.view', [
             'acto' => $acto,
-            'documentos' => $documentos
+            'documentos' => $documentos,
+            'autenticado' => $autenticado,
+            'user' => $user,
         ]);
     }
 

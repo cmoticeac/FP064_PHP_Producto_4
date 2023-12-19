@@ -56,6 +56,12 @@
                     <p>Calendario</p>
                 </a>
             </li>
+                <li>
+                    <a class="nav-link" href="{{ url('/eventos') }}">
+                        <i class="nc-icon nc-notes"></i>
+                        <p>Documentos Eventos</p>
+                    </a>
+                </li>
             <!-- Elemento de navegación para editar el perfil del usuario -->
             <li>
                 <a class="nav-link" href="{{ url('user-edit') }}">

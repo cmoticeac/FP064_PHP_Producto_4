@@ -9,7 +9,11 @@
 
 <div class="wrapper">
     {{-- Incluye 'sidebar-guest.blade.php' --}}
-    @include('sidebar-guest')
+    @if($autenticado)
+        @include('sidebar')
+    @else
+        @include('sidebar-guest')
+    @endif
 
     <div class="main-panel">
         {{-- Incluye 'navbar.blade.php', pasando los mensajes flash si están disponibles --}}
@@ -25,14 +29,22 @@
                     <p><strong>Descripción corta:</strong> {{ $acto->Descripcion_corta ?? 'No disponible' }}</p>
                     <p><strong>Descripción larga:</strong> {{ $acto->Descripcion_larga ?? 'No disponible' }}</p>
 
-                    {{-- Listar documentos si existen --}}
-                    @if($documentos->count() > 0)
+                    {{-- Si el usuario está autenticado listar documentos --}}
+                    @if($autenticado)
                         <p><strong>Documentos</strong></p>
-                        <ul>
-                            @foreach($documentos as $documento)
-                                <li><a target="_blank" href="{{ asset('uploads/' . $documento->Localizacion_documentacion) }}">{{ $documento->Titulo_documento }}</a></li>
-                            @endforeach
-                        </ul>
+                        
+                        {{-- Si no hay documentos mostramos mesnaje --}}
+                        @if(count($documentos) == 0)
+                            <p>No hay documentos disponibles.</p>
+                        @else
+                            <ul>
+                                @foreach($documentos as $documento)
+                                    <li><a target="_blank" href="{{ asset('uploads/' . $documento->Localizacion_documentacion) }}">{{ $documento->Titulo_documento }}</a></li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    @else
+                        <p>Para ver los documentos debes estar autenticado.</p>
                     @endif
                 
                     <a href="{{ url('/invitacion') }}" type="submit" class="btn btn-primary">Inscribirse</a>
