@@ -36,7 +36,7 @@
                         {{-- Si no hay documentos mostramos mesnaje --}}
                         @if(count($documentos) == 0)
                             <p>No hay documentos disponibles.</p>
-                        @else
+                        @endif
                             <ul>
                                 @foreach($documentos as $documento)
                                     <li><a target="_blank" href="{{ asset('uploads/' . $documento->Localizacion_documentacion) }}">{{ $documento->Titulo_documento }}</a></li>

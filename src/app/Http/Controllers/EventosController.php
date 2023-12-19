@@ -13,8 +13,15 @@ class EventosController extends Controller
         $actos = Acto::with(['ponentes', 'tipoActo'])->get();
         $eventos = $this->crearEventos($actos);
 
+        // variable booleana que define si el usuario esta auténticado o no
+        $autenticado = auth()->check();
+
+        $user = auth()->user();
+
         return view('eventos.index', [
-            'eventos' => json_encode($eventos)
+            'eventos' => json_encode($eventos),
+            'autenticado' => $autenticado,
+            'user' => $user,
         ]);
     }
 

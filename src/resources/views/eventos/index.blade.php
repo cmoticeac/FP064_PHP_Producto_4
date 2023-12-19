@@ -8,8 +8,13 @@
 @section('body')
 
 <div class="wrapper">
-    {{-- Incluye 'sidebar-guest.blade.php' --}}
-    @include('sidebar-guest')
+{{-- Incluye 'sidebar-guest.blade.php' --}}
+    @if($autenticado)
+        @include('sidebar')
+    @else
+        @include('sidebar-guest')
+    @endif
+
 
     <div class="main-panel">
         
